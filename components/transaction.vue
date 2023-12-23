@@ -32,6 +32,7 @@
 const props = defineProps({
   transaction: Object,
 });
+const emit = defineEmits(["deleted"]);
 
 const isIncome = computed(() => props.transaction.type === "Income");
 const icon = computed(() =>
@@ -55,6 +56,7 @@ const deleteTransaction = async () => {
       title: "Transaction Deleted!",
       icon: "i-heoicons-check-circle",
     });
+    emit("deleted", props.transaction.id);
   } catch (error) {
     toast.add({
       title: "Transaction Failed",
