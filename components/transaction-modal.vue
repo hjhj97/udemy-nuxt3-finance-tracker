@@ -83,7 +83,7 @@ const emit = defineEmits(["update:modelValue", "saved"]);
 
 const isLoading = ref(false);
 const supabase = useSupabaseClient();
-const toast = useToast();
+const { toastSuccess, toastError } = useAppToast();
 
 const defaultSchema = z.object({
   created_at: z.string(),
@@ -127,18 +127,16 @@ const save = async () => {
       .upsert({ ...state.value });
 
     if (!error) {
-      toast.add({ title: " saved", icon: "i-heroicons-check-cicle" });
+      toastSuccess({ title: " saved" });
       isOpen.value = false;
       emit("saved");
       return;
     }
     throw error;
   } catch (error) {
-    toast.add({
+    toastError({
       title: "Not Saved",
       description: error.message,
-      icon: "i-heroicons-exclamation-circle",
-      color: "red",
     });
   } finally {
     isLoading.value = false;
