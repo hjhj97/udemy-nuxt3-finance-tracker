@@ -7,10 +7,7 @@
         :ui="{ item: { disabled: 'cursor-text select-text' }, width: 'w-64' }"
         v-if="user"
       >
-        <UAvatar
-          src="https://avatars.githubusercontent.com/u/739984?v=4"
-          alt="Avatar"
-        />
+        <UAvatar :src="url" alt="Avatar" />
 
         <UButton @click="signout" class="ml-4">Sign out</UButton>
         <UButton @click="navigateTo('/settings')" class="ml-4"
@@ -23,6 +20,7 @@
 <script setup>
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
+const { url } = useAvatarUrl();
 
 const signout = async () => {
   await supabase.auth.signOut();
