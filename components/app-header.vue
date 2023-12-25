@@ -13,6 +13,9 @@
         />
 
         <UButton @click="signout" class="ml-4">Sign out</UButton>
+        <UButton @click="navigateTo('/settings')" class="ml-4"
+          >Settings</UButton
+        >
       </UDropdown>
     </div>
   </header>
